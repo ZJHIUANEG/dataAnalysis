@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --port 8364 --hot"
+    "dev": "webpack-dev-server --open --port 8334 --hot"
   },
   "keywords": [],
   "author": "",
