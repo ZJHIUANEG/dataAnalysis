@@ -48,7 +48,7 @@ export default {
       // 异步加载数据
       hisgChart.showLoading();
       LineChart.showLoading();
-      $.get("static/data/data.json").done(function(data) {
+      $.get("../../../static/data/data.json").done(function(data) {
         hisgChart.hideLoading();
 
         // for (let i = 0; i < Object.keys(data.data).length; i++) {
