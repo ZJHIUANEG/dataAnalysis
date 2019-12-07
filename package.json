@@ -1,10 +1,10 @@
 {
   "name": "DATA",
   "version": "1.0.0",
-  "main": "dist/vue.js",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --port 8384 --hot"
+    "dev": "webpack-dev-server --open --port 8364 --hot"
   },
   "keywords": [],
   "author": "",
