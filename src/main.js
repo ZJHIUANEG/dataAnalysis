@@ -7,8 +7,6 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 // 导入自己的 router.js 模块
 import router from "./router";
-// 配置全局设置
-// Vue.http.options.root = '...';
 
 // 导入 App 根组件
 import app from "./App.vue";
