@@ -30,7 +30,7 @@ module.exports = {
       // 所有第三方模块的 配置规则
       { test: /\.css$/, use: ["style-loader", "css-loader"] }, // 配置处理 .css 文件的第三方loader规则
       // { test: /\.less$/, use: ["style-loader", "css-loader", "less-loader"] }, // 配置处理 .less 文件的第三方loader规则
-      { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] }, // 配置处理 .scss 文件的第三方loader规则
+      // { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] }, // 配置处理 .scss 文件的第三方loader规则
       //‘?’ 后传参，limit 给定的值，是图片的大小，单位是 byte，如果我们引用的图片，大于或等于给定的limit值，则不会转为base64格式的字符串，如果图片小于给定的limit值，则会被转为base64的字符串
       { test: /\.(jpg|png|gif|bmp|jpeg|svg)$/, use: "url-loader" }, // 配置处理图片路径的 loader
       { test: /\.(ttf|eot|svg|woff|woff2)$/, use: "url-loader" }, // 配置处理字体文件的 loader

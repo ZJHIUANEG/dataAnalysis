@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 * {
   padding: 0;
   margin: 0;
@@ -85,14 +85,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // align-content: flex-end;
   background: #fff;
   background-color: rgb(253, 253, 244);
   z-index: 10;
-  #Histogram,
-  #Linechart {
-    width: 100%;
-    height: 50%;
-  }
+}
+#Histogram,
+#Linechart {
+  width: 100%;
+  height: 50%;
 }
 </style>
