@@ -20,6 +20,12 @@ const Linechart = {
   grid: {
     top: "30%"
   },
+  dataZoom: [
+    {
+      type: "slider",
+      show: true
+    }
+  ],
   xAxis: [
     {
       type: "category",

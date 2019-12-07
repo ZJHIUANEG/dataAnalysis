@@ -49,7 +49,8 @@ const Histogram = {
   },
   dataZoom: [
     {
-      type: "inside"
+      type: "slider",
+      show: true
     }
   ],
   series: [
