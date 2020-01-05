@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #input_tree {
+            width: 1000px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .tree {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            z-index: 100;
+
+        }
+
+        .tree>div {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            outline: none;
+            border: none;
+            color: white;
+            background: rgb(86, 139, 209);
+            z-index: 100;
+            position: relative;
+        }
+
+        lineSvg {
+            width: 100%;
+            height: 300px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            z-index: 99;
+            background: black;
+        }
+
+        svg {
+            width: 100%;
+            height: 150px;
+        }
+
+        line {
+            z-index: 99;
+        }
+
+        .explain {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            color: white;
+            background: rgb(86, 139, 209);
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="input_tree">
+        <div class="tree">
+            <div>
+                <button id="parentLeaf"></button>
+            </div>
+            <div class="leaf">
+
+            </div>
+            <div class="childLeaf"></div>
+        </div>
+        <div class="lineSvg">
+            <svg>
+            </svg>
+            <svg>
+            </svg>
+        </div>
+    </div>
+    <div class="explain">
+        说明：当点击下一个按钮后，之前的按钮就不能点击了
+    </div>
+
+    <script>
+        let tree = document.getElementsByClassName("tree")[0];
+        let leafDom = document.getElementsByClassName("leaf")[0];
+        let parentLeaf = document.getElementById("parentLeaf");
+        var childLeaf = document.getElementsByClassName("childLeaf")[0];
+
+        let x = leafDom.clientWidth / 2;
+        let y = leafDom.clientHeight / 2;
+
+        let lineNode = [];
+
+        function clearLine() {
+            let svg = document.getElementsByTagName("svg")[0];
+            lineNode = [];
+            svg.innerHTML = "";
+        }
+
+        function createBtn() {
+            var btn = document.createElement("button");
+            leafDom.innerHTML += "<button class='btn' onclick='createLeaf()'></button>"
+
+        }
+        function createChildBtn(index) {
+            var btn = document.createElement("button");
+            childLeaf.innerHTML += "<button class='childBtn' data-index='" + index + "'></button>"
+
+        }
+
+        parentLeaf.onclick = function () {
+            createBtn();
+            clearLine();
+
+            let lineStr;
+            let svg = document.getElementsByTagName("svg")[0];
+
+            let leafBtn = document.getElementsByClassName("btn");
+
+            for (let j = 0; j < leafBtn.length; j++) {
+                lineNode.push({
+                    x: parseInt(leafBtn[j].offsetLeft - tree.offsetLeft + leafBtn[j].clientWidth / 2),
+                    y: parseInt(leafDom.clientHeight + leafDom.clientHeight / 2)
+                })
+            }
+            for (let k = 0; k < lineNode.length; k++) {
+                lineStr += '<line x1="' + x + '" y1="' + y + '" x2="' + lineNode[k].x +
+                    '" y2="' + lineNode[k].y + '" style="stroke:black;stroke-width:2" />';
+            }
+            svg.innerHTML += lineStr;
+        }
+
+        var nodeChild = [];
+
+        function clearChildLine() {
+            let svg = document.getElementsByTagName("svg")[1];
+            nodeChild = [];
+            svg.innerHTML = "";
+        }
+
+        function createLeaf() {
+            clearChildLine();
+            var item = event.target;
+            var listArr = Array.from(leafDom.querySelectorAll("button"));
+            // console.log(listArr.indexOf(item));
+            createChildBtn(listArr.indexOf(item));
+            var leafPBtn = document.getElementsByClassName("leaf")[0].getElementsByClassName("btn");
+
+            let lineStr;
+            let svg = document.getElementsByTagName("svg")[1];
+
+            let leafCBtn = document.getElementsByClassName("childBtn");
+            nodeChild = [];
+            var index = 0;
+            for (let j = 0; j < leafCBtn.length; j++) {
+                index = leafCBtn[j].getAttribute("data-index")
+                nodeChild.push({
+                    x1: parseInt(leafPBtn[index].offsetLeft - tree.offsetLeft + leafPBtn[index].clientWidth / 2),
+                    y1: parseInt(0),
+                    x2: parseInt(leafCBtn[j].offsetLeft - tree.offsetLeft + leafCBtn[j].clientWidth / 2),
+                    y2: parseInt(leafDom.clientHeight),
+                    index: index
+                })
+                index = 0;
+            }
+            for (let k = 0; k < nodeChild.length; k++) {
+                lineStr += '<line x1="' + nodeChild[k].x1 + '" y1="' + nodeChild[k].y1 + '" x2="' + nodeChild[k].x2 +
+                    '" y2="' + nodeChild[k].y2 + '" style="stroke:black;stroke-width:2" />';
+            }
+            svg.innerHTML += lineStr;
+            isClickAble();
+        }
+
+        function isClickAble() {
+            var item = event.target;
+            var listArr = Array.from(tree.querySelectorAll("button"));
+            var btn = document.getElementsByTagName("button")
+            for (var i = 0; i < listArr.indexOf(item); i++) {
+                btn[i].disabled = true;
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
